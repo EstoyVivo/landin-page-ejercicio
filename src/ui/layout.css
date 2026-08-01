@@ -1,0 +1,545 @@
+/* ============ background field (behind the brain canvas) ============ */
+.bg-field {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-field);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: -20%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 68px 68px;
+  animation: grid-drift 90s linear infinite;
+}
+
+.bg-nebula {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+}
+
+.bg-nebula--a {
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(77, 124, 255, 0.35), transparent 70%);
+  animation: nebula-drift-a 50s ease-in-out infinite;
+}
+
+.bg-nebula--b {
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent 70%);
+  animation: nebula-drift-b 60s ease-in-out infinite;
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(68px, 68px, 0);
+  }
+}
+
+@keyframes nebula-drift-a {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6vw, 4vw); }
+}
+
+@keyframes nebula-drift-b {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-5vw, -6vw); }
+}
+
+/* ============ WebGL fallback ============ */
+/* No canvas at all when unsupported — a static gradient carries the same
+   palette/mood so the page never shows a blank hero. */
+body.no-webgl::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-canvas);
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 35%, rgba(77, 124, 255, 0.16), transparent 60%),
+    radial-gradient(ellipse 45% 40% at 75% 65%, rgba(139, 92, 246, 0.12), transparent 65%);
+}
+
+/* ============ legibility scrim ============ */
+/* Hero and CTA float text directly over the brain with no glass backing.
+   At narrow viewports there isn't enough horizontal room to offset the brain
+   away from the text column (see brain/scene.ts responsive composition), so
+   a very low-opacity vertical scrim rides behind the text as a legibility
+   safety net. It's subtle enough to stay invisible on wide screens (where the
+   brain is already offset clear of the text) and only meaningfully kicks in
+   below the tablet breakpoint. */
+.hero::before,
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: -4% -6%;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 70% 60% at 30% 45%,
+    rgba(5, 7, 10, 0.55),
+    rgba(5, 7, 10, 0) 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-out;
+}
+
+@media (max-width: 720px) {
+  .hero::before,
+  .cta::before {
+    opacity: 1;
+  }
+}
+
+/* ============ hero ============ */
+.hero {
+  position: relative;
+  isolation: isolate; /* keeps ::before's negative z-index scoped to this section */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-2xl) var(--margin-edge);
+}
+
+.hero__content {
+  /* wide enough that the longest headline line (measured ~899px at the
+     7.5rem display cap) never force-wraps; narrows fluidly below that via
+     the 90vw term so mobile still gets the ~85-95%-of-viewport column */
+  max-width: min(60rem, 90vw);
+}
+
+.hero__title {
+  margin-top: var(--space-xs);
+}
+
+.hero__lead {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.hero__lead .lead {
+  max-width: 32ch;
+}
+
+.hero__meta {
+  position: absolute;
+  left: var(--margin-edge);
+  right: var(--margin-edge);
+  bottom: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs) var(--space-md);
+}
+
+.hero__meta-label {
+  margin-left: auto;
+}
+
+.hero__meta-label--accent {
+  color: var(--accent-blue);
+  margin-left: 0;
+}
+
+.hero__meta span:first-child {
+  margin-left: 0;
+}
+
+/* ============ trust + tech marquees ============ */
+.trust,
+.tech {
+  padding: var(--space-md) var(--margin-edge);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  position: relative;
+}
+
+.trust__label {
+  margin-bottom: var(--space-sm);
+}
+
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  gap: var(--space-lg);
+  animation: marquee-scroll 34s linear infinite;
+}
+
+.marquee__item {
+  font-size: var(--fs-body-lg);
+  font-weight: 500;
+  color: var(--fg-45);
+  white-space: nowrap;
+}
+
+.marquee--tech .marquee__track {
+  animation-duration: 26s;
+  animation-direction: reverse;
+}
+
+.marquee--tech .marquee__item {
+  font-size: var(--fs-body);
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ============ process ============ */
+.process {
+  padding: var(--space-xl) var(--margin-edge);
+}
+
+.process__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg) var(--space-md);
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  position: relative;
+}
+
+.process__list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border-hover) 20%, var(--glass-border-hover) 80%, transparent);
+}
+
+.process__item {
+  flex: 1 1 13rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.process__number {
+  color: var(--accent-blue);
+}
+
+.process__title {
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+}
+
+.process__desc {
+  color: var(--fg-70);
+  font-size: var(--fs-body);
+  max-width: 26ch;
+}
+
+/* generic non-glass fade-up, used where a glass panel would be too heavy */
+.fade-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease-out-soft), transform 0.8s var(--ease-out-soft);
+}
+
+.fade-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ solutions ============ */
+.solutions {
+  padding: var(--space-xl) var(--margin-edge);
+}
+
+.solutions__title {
+  margin: var(--space-sm) 0 var(--space-lg);
+  max-width: 18ch;
+}
+
+.solutions__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-sm);
+}
+
+.solutions__item {
+  grid-column: span 3;
+  min-width: 0;
+}
+
+.solutions__item--c,
+.solutions__item--d,
+.solutions__item--e {
+  grid-column: span 2;
+}
+
+.solutions__item--b {
+  margin-top: var(--space-md);
+}
+
+.solutions__item--d {
+  margin-top: var(--space-sm);
+}
+
+.solutions__item--f {
+  grid-column: span 6;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.solutions__item--f .card__icon {
+  margin-bottom: 0;
+}
+
+.card__icon {
+  display: inline-block;
+  font-size: var(--fs-h2);
+  line-height: 1;
+  color: var(--accent-blue);
+  margin-bottom: var(--space-xs);
+}
+
+.card h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  margin-bottom: var(--space-3xs);
+  text-wrap: balance;
+}
+
+.card p {
+  color: var(--fg-70);
+  font-size: var(--fs-body);
+}
+
+/* ============ impact ============ */
+.impact {
+  padding: var(--space-xl) var(--margin-edge);
+}
+
+.impact__panel {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: var(--space-lg);
+  padding: var(--space-md);
+}
+
+.impact__data {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xs);
+  align-content: start;
+}
+
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  padding: var(--space-xs);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+  min-width: 0;
+}
+
+.stat-tile__label {
+  font-size: var(--fs-small);
+}
+
+.stat-tile__value {
+  font-size: var(--fs-stat);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+}
+
+.stat-tile__delta {
+  font-size: var(--fs-small);
+  color: var(--accent-blue);
+}
+
+.impact__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  justify-content: center;
+  min-width: 0;
+}
+
+.impact__metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: var(--space-3xs) 0;
+}
+
+.impact__metric {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2xs) var(--space-xs);
+}
+
+.impact__metric strong {
+  font-size: var(--fs-h3);
+  min-width: 6ch;
+  color: var(--fg);
+}
+
+.impact__metric span {
+  color: var(--fg-70);
+  font-size: var(--fs-body);
+}
+
+/* ============ cta final ============ */
+.cta {
+  position: relative;
+  isolation: isolate;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-2xl) var(--margin-edge);
+}
+
+.cta__title {
+  /* same reasoning as .hero__content: wide enough for the longest line
+     (~834px at the display cap) to stay on one line */
+  max-width: min(56rem, 90vw);
+}
+
+.cta__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  /* wide enough for both CTAs to sit side by side (see .cta__actions) while
+     still reading as a compact column, not a full-width block */
+  max-width: min(43rem, 92vw);
+  align-self: flex-end;
+  text-align: left;
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+/* ============ footer ============ */
+.footer {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2xs) var(--space-md);
+  padding: var(--space-sm) var(--margin-edge);
+  border-top: 1px solid var(--glass-border);
+  font-size: var(--fs-small);
+  color: var(--fg-45);
+}
+
+.footer__mono {
+  color: var(--fg-45);
+}
+
+/* ============ responsive ============ */
+/* Structural reflow only (column counts, direction, offsets) — sizing and
+   spacing above are already fluid via clamp() and never jump at these
+   boundaries, so these queries exist purely to re-shape the grid, not to
+   patch font sizes. */
+@media (max-width: 900px) {
+  .solutions__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .solutions__item,
+  .solutions__item--c,
+  .solutions__item--d,
+  .solutions__item--e,
+  .solutions__item--f {
+    grid-column: span 2;
+    margin-top: 0;
+  }
+
+  .impact__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .cta__side {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .solutions__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solutions__item,
+  .solutions__item--c,
+  .solutions__item--d,
+  .solutions__item--e,
+  .solutions__item--f {
+    grid-column: span 1;
+  }
+
+  .hero__meta {
+    bottom: var(--space-md);
+  }
+
+  .hero__meta-label {
+    margin-left: 0;
+  }
+
+  .footer {
+    justify-content: flex-start;
+  }
+
+  .cta__actions {
+    flex-direction: column;
+  }
+
+  .cta__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-grid,
+  .bg-nebula--a,
+  .bg-nebula--b,
+  .marquee__track {
+    animation: none;
+  }
+}

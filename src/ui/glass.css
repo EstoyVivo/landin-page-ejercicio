@@ -1,0 +1,84 @@
+.glass,
+.card {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-lg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  box-shadow: var(--glass-shadow);
+  transition: background 0.4s var(--ease-out-soft), border-color 0.4s var(--ease-out-soft),
+    transform 0.4s var(--ease-out-soft), backdrop-filter 0.4s var(--ease-out-soft);
+}
+
+/* single-pixel top reflection instead of a broad gradient fill */
+.glass::before,
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 12%
+  );
+}
+
+/* faint diagonal refraction on the border, via a masked pseudo-element */
+.glass::after,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 40%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.glass:hover,
+.card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-4px);
+  backdrop-filter: blur(var(--glass-blur-hover)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-hover)) saturate(150%);
+}
+
+.card {
+  padding: var(--space-md);
+  border-radius: var(--glass-radius-sm);
+}
+
+/* entrance: emerges from the background itself — blur + opacity, never a slide */
+.glass-reveal {
+  opacity: 0;
+  filter: blur(18px);
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease-out-soft), filter 0.8s var(--ease-out-soft),
+    transform 0.8s var(--ease-out-soft), background 0.4s var(--ease-out-soft),
+    border-color 0.4s var(--ease-out-soft);
+}
+
+.glass-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-reveal {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+  .glass:hover,
+  .card:hover {
+    transform: none;
+  }
+}

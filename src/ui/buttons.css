@@ -1,0 +1,230 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: clamp(0.7rem, 0.62rem + 0.36vw, 0.85rem) clamp(1.15rem, 0.95rem + 0.89vw, 1.5rem);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  border-radius: 999px;
+  isolation: isolate;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn span:not(.btn__ripple) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ghost: thin static border, background reacts on hover only */
+.btn--ghost {
+  border: 1px solid var(--glass-border-hover);
+  color: var(--fg);
+}
+
+.btn--ghost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(77, 124, 255, 0.35), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-soft);
+}
+
+.btn--ghost:hover::before {
+  opacity: 1;
+}
+
+.btn__dot {
+  position: relative;
+  z-index: 2;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  box-shadow: 0 0 10px 2px rgba(77, 124, 255, 0.7);
+}
+
+/* glass: a floating pane, not a solid pill. Reuses the exact same glass
+   mechanics as .card (background fill, backdrop-filter, top reflection,
+   diagonal refraction — via the shared .glass class in the markup) so it
+   sits in the interface as one more piece of glass, just re-tuned for a
+   compact, energetic CTA. The brand blue/violet only ever shows up in the
+   border and the ambient glow — never as a solid fill. */
+.btn--glass {
+  --glass-blur: 28px;
+  --glass-blur-hover: 36px;
+  --glass-border: rgba(77, 124, 255, 0.38);
+  --glass-border-hover: rgba(122, 162, 255, 0.8);
+  color: var(--fg);
+  padding: clamp(0.9rem, 0.78rem + 0.54vw, 1.1rem) clamp(1.5rem, 1.2rem + 1.43vw, 2rem);
+  font-size: var(--fs-body-lg);
+  /* rest state already glows faintly — "nunca completamente plano" — and the
+     last term breathes with the brain via --breath-intensity (main.ts). */
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 0 calc(16px + var(--breath-intensity, 0) * 6px) rgba(77, 124, 255, 0.22);
+  transition: box-shadow 0.5s var(--ease-out-soft), border-color 0.4s var(--ease-out-soft),
+    background 0.4s var(--ease-out-soft), backdrop-filter 0.4s var(--ease-out-soft),
+    transform 0.4s var(--ease-out-soft);
+}
+
+.btn--glass:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 0 calc(26px + var(--breath-intensity, 0) * 6px) rgba(77, 124, 255, 0.38),
+    0 0 16px rgba(139, 92, 246, 0.16);
+}
+
+.btn--glass:active {
+  transform: translateY(-1px) scale(0.966);
+  transition-duration: 0.1s;
+}
+
+.btn--glass span:not(.btn__ripple) {
+  color: var(--fg);
+  text-shadow: 0 0 10px rgba(122, 162, 255, 0.3);
+  transition: text-shadow 0.4s var(--ease-out-soft);
+}
+
+.btn--glass:hover span:not(.btn__ripple) {
+  text-shadow: 0 0 15px rgba(122, 162, 255, 0.45);
+}
+
+/* the icon matches the label exactly — same color, same glow — instead of
+   the site-wide blue used for every other icon */
+.btn--glass .icon {
+  color: var(--fg);
+  opacity: 1;
+  filter: drop-shadow(0 0 5px rgba(122, 162, 255, 0.3));
+}
+
+.btn--glass:hover .icon {
+  color: var(--fg);
+  filter: drop-shadow(0 0 9px rgba(122, 162, 255, 0.5));
+  transform: translateX(3px);
+}
+
+/* secondary: same glass mechanics and same padding/size as the primary CTA
+   (so the pair reads as one balanced row), just a quieter border and glow —
+   "ligeramente más discreto", never a different quality of finish. */
+.btn--glass-secondary {
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-hover: rgba(122, 162, 255, 0.55);
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 0 calc(10px + var(--breath-intensity, 0) * 4px) rgba(77, 124, 255, 0.12);
+}
+
+.btn--glass-secondary:hover {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 0 calc(18px + var(--breath-intensity, 0) * 4px) rgba(77, 124, 255, 0.22);
+}
+
+.btn--glass-secondary span:not(.btn__ripple) {
+  text-shadow: 0 0 6px rgba(122, 162, 255, 0.18);
+}
+
+.btn--glass-secondary:hover span:not(.btn__ripple) {
+  text-shadow: 0 0 10px rgba(122, 162, 255, 0.3);
+}
+
+.btn--glass-secondary .icon {
+  filter: drop-shadow(0 0 3px rgba(122, 162, 255, 0.18));
+}
+
+.btn--glass-secondary:hover .icon {
+  filter: drop-shadow(0 0 6px rgba(122, 162, 255, 0.32));
+}
+
+/* a single luminous pulse from the center on click — never elastic, just an
+   expanding fade — toggled by src/ui/ctaRipple.ts */
+.btn__ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(122, 162, 255, 0.35) 45%, transparent 72%);
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+  z-index: 0;
+  /* explicit none: this element must be driven only by the keyframe below,
+     never by an incidental transition picked up from a shared selector */
+  transition: none;
+}
+
+.btn--glass.is-clicked .btn__ripple {
+  animation-name: btn-ripple;
+  animation-duration: 0.6s;
+  /* the animation shorthand doesn't reliably resolve a var() timing-function
+     in every engine — set it as its own longhand instead */
+  animation-timing-function: var(--ease-out-soft);
+  animation-fill-mode: none;
+}
+
+@keyframes btn-ripple {
+  0% {
+    opacity: 0.6;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(15);
+  }
+}
+
+.btn__icon {
+  position: relative;
+  z-index: 2;
+}
+
+/* text link with arrow — used for secondary CTAs */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--fg-70);
+  border-bottom: 1px solid var(--glass-border-hover);
+  padding-bottom: 0.35rem;
+  transition: color 0.3s ease-out;
+}
+
+.link-arrow:hover {
+  color: var(--fg);
+}
+
+.link-arrow__icon {
+  font-style: normal;
+  transition: transform var(--icon-transition);
+}
+
+.link-arrow:hover .link-arrow__icon {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--glass:hover {
+    transform: none;
+  }
+  .btn--glass.is-clicked .btn__ripple {
+    animation: none;
+  }
+}

@@ -1,0 +1,59 @@
+/* Lucide is the only icon language on this site — monochrome, lit by the same
+   blue used everywhere else in the interface, never a solid decorative color. */
+.icon {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  color: var(--icon-color);
+  opacity: var(--icon-opacity);
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: color var(--icon-transition), transform var(--icon-transition),
+    filter var(--icon-transition), opacity var(--icon-transition);
+  filter: drop-shadow(0 0 0 rgba(77, 124, 255, 0));
+}
+
+/* contextual sizing only — stroke, color, opacity and timing stay identical everywhere */
+.eyebrow__arrow .icon {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.card__icon .icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.modal__success-icon .icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.field__chevron .icon {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+/* shared hover language: brighten, nudge toward the lighter blue, very soft glow */
+.link-arrow:hover .icon,
+.btn:hover .icon,
+.nav__links a:hover .icon,
+.card:hover .card__icon .icon {
+  color: var(--icon-color-hover);
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(122, 162, 255, 0.5));
+}
+
+/* feature icons: a faint rotation + lift reads as "alive" without implying direction */
+.card:hover .card__icon .icon {
+  transform: rotate(5deg) translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon {
+    transition: none;
+  }
+  .card:hover .card__icon .icon {
+    transform: none;
+  }
+}

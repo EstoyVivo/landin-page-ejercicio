@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miseltum — Software que piensa como tu negocio</title>
+    <meta
+      name="description"
+      content="Diseñamos, desarrollamos e implementamos sistemas de software a medida para empresas que buscan automatizar, escalar y tomar mejores decisiones."
+    />
+    <link rel="stylesheet" href="/styles/fonts.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/src/ui/typography.css" />
+    <link rel="stylesheet" href="/src/ui/glass.css" />
+    <link rel="stylesheet" href="/src/ui/buttons.css" />
+    <link rel="stylesheet" href="/src/ui/nav.css" />
+    <link rel="stylesheet" href="/src/ui/layout.css" />
+    <link rel="stylesheet" href="/src/ui/icons.css" />
+    <link rel="stylesheet" href="/src/ui/modal.css" />
+  </head>
+  <body>
+    <canvas id="brain-canvas" aria-hidden="true"></canvas>
+    <div class="bg-field" aria-hidden="true">
+      <div class="bg-grid"></div>
+      <div class="bg-nebula bg-nebula--a"></div>
+      <div class="bg-nebula bg-nebula--b"></div>
+    </div>
+
+    <header class="nav" data-nav>
+      <a href="#top" class="nav__mark">MISELTUM</a>
+      <nav class="nav__links">
+        <a href="#trabajo">Trabajo</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#tecnologias">Tecnologías</a>
+        <a href="#nosotros">Sobre nosotros</a>
+      </nav>
+      <a href="#contacto" class="btn btn--ghost nav__cta">
+        <span>Contacto</span>
+        <i class="btn__dot" aria-hidden="true"></i>
+      </a>
+    </header>
+
+    <main id="top">
+      <!-- ================= HERO ================= -->
+      <section class="hero" id="hero">
+        <div class="hero__content">
+          <p class="eyebrow reveal-line" data-reveal>
+            <span class="eyebrow__arrow" data-icon="arrow-left" aria-hidden="true"></span> Software a medida
+          </p>
+
+          <h1 class="display hero__title">
+            <span class="reveal-line" data-reveal>Software</span>
+            <span class="reveal-line" data-reveal>que piensa</span>
+            <span class="reveal-line" data-reveal
+              >como tu <em class="glow">negocio</em></span
+            >
+          </h1>
+
+          <div class="hero__lead">
+            <p class="lead reveal-fade" data-reveal-delay>
+              Diseñamos, desarrollamos e implementamos sistemas a medida para
+              empresas que buscan automatizar, escalar y tomar mejores
+              decisiones.
+            </p>
+            <a href="#contacto" class="link-arrow reveal-fade" data-reveal-delay>
+              <span>Hablemos de tu proyecto</span>
+              <i class="link-arrow__icon" data-icon="arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__meta">
+          <span class="mono">01</span>
+          <span class="mono hero__meta-label">Sistemas inteligentes</span>
+          <span class="mono hero__meta-label hero__meta-label--accent"
+            >Resultados reales</span
+          >
+        </div>
+      </section>
+
+      <!-- ================= TRUST MARQUEE ================= -->
+      <section class="trust" aria-label="Empresas que confían en nosotros">
+        <p class="eyebrow trust__label">Empresas que confían en nosotros</p>
+        <div class="marquee" data-marquee>
+          <div class="marquee__track">
+            <span class="marquee__item">Altum Universidad</span>
+            <span class="marquee__item">RD Consultoría Fiscal</span>
+            <span class="marquee__item">Decotex Pinturas</span>
+            <span class="marquee__item">SolTours</span>
+            <span class="marquee__item">Lady Tambori</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PROCESO ================= -->
+      <section class="process" id="servicios">
+        <p class="eyebrow"><span class="eyebrow__arrow" data-icon="arrow-left" aria-hidden="true"></span> Nuestro proceso</p>
+        <ol class="process__list">
+          <li class="process__item fade-reveal" data-reveal-card>
+            <span class="mono process__number">01</span>
+            <h3 class="process__title">Descubrimiento</h3>
+            <p class="process__desc">Entendemos tu negocio, objetivos y procesos.</p>
+          </li>
+          <li class="process__item fade-reveal" data-reveal-card>
+            <span class="mono process__number">02</span>
+            <h3 class="process__title">Arquitectura</h3>
+            <p class="process__desc">Diseñamos la solución técnica ideal para escalar.</p>
+          </li>
+          <li class="process__item fade-reveal" data-reveal-card>
+            <span class="mono process__number">03</span>
+            <h3 class="process__title">Desarrollo</h3>
+            <p class="process__desc">Construimos iterativamente con enfoque en calidad.</p>
+          </li>
+          <li class="process__item fade-reveal" data-reveal-card>
+            <span class="mono process__number">04</span>
+            <h3 class="process__title">Implementación</h3>
+            <p class="process__desc">Desplegamos, capacitamos y te acompañamos.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ================= SOLUCIONES ================= -->
+      <section class="solutions" id="trabajo">
+        <p class="eyebrow"><span class="eyebrow__arrow" data-icon="arrow-left" aria-hidden="true"></span> Soluciones que construimos</p>
+        <h2 class="h2 solutions__title">
+          Un sistema distinto para cada forma de operar.
+        </h2>
+
+        <div class="solutions__grid">
+          <article class="card glass-reveal solutions__item solutions__item--a" data-reveal-card>
+            <span class="card__icon" data-icon="globe" aria-hidden="true"></span>
+            <h3>Plataformas web</h3>
+            <p>Sistemas escalables, rápidos y seguros.</p>
+          </article>
+          <article class="card glass-reveal solutions__item solutions__item--b" data-reveal-card>
+            <span class="card__icon" data-icon="layout-grid" aria-hidden="true"></span>
+            <h3>Sistemas internos</h3>
+            <p>Herramientas para optimizar tu operación.</p>
+          </article>
+          <article class="card glass-reveal solutions__item solutions__item--c" data-reveal-card>
+            <span class="card__icon" data-icon="zap" aria-hidden="true"></span>
+            <h3>Automatización</h3>
+            <p>Procesos automáticos que ahorran tiempo.</p>
+          </article>
+          <article class="card glass-reveal solutions__item solutions__item--d" data-reveal-card>
+            <span class="card__icon" data-icon="link" aria-hidden="true"></span>
+            <h3>Integraciones</h3>
+            <p>Conectamos tus sistemas y APIs.</p>
+          </article>
+          <article class="card glass-reveal solutions__item solutions__item--e" data-reveal-card>
+            <span class="card__icon" data-icon="smartphone" aria-hidden="true"></span>
+            <h3>Aplicaciones móviles</h3>
+            <p>Apps nativas para iOS y Android.</p>
+          </article>
+          <article class="card glass-reveal solutions__item solutions__item--f" data-reveal-card>
+            <span class="card__icon" data-icon="brain" aria-hidden="true"></span>
+            <h3>IA empresarial</h3>
+            <p>Inteligencia artificial aplicada a resultados.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= IMPACTO ================= -->
+      <section class="impact">
+        <div class="card glass-reveal impact__panel" data-reveal-card>
+          <div class="impact__data">
+            <div class="stat-tile">
+              <span class="mono stat-tile__label">Ingresos</span>
+              <span class="stat-tile__value">$4,580,920</span>
+              <span class="stat-tile__delta">+23.6% vs mes anterior</span>
+            </div>
+            <div class="stat-tile">
+              <span class="mono stat-tile__label">Procesos automatizados</span>
+              <span class="stat-tile__value">82%</span>
+              <span class="stat-tile__delta">+15%</span>
+            </div>
+            <div class="stat-tile">
+              <span class="mono stat-tile__label">Usuarios activos</span>
+              <span class="stat-tile__value">1,482</span>
+              <span class="stat-tile__delta">+12%</span>
+            </div>
+            <div class="stat-tile">
+              <span class="mono stat-tile__label">Errores reducidos</span>
+              <span class="stat-tile__value">-97%</span>
+              <span class="stat-tile__delta">desde implementación</span>
+            </div>
+          </div>
+
+          <div class="impact__text">
+            <p class="eyebrow"><span class="eyebrow__arrow" data-icon="arrow-left" aria-hidden="true"></span> Impacto real</p>
+            <h2 class="h2">
+              Convertimos operaciones complejas en ventajas competitivas.
+            </h2>
+            <div class="impact__metrics">
+              <div class="impact__metric">
+                <strong>-82%</strong>
+                <span>Reducción de tiempo en procesos manuales</span>
+              </div>
+              <div class="impact__metric">
+                <strong>+70%</strong>
+                <span>Productividad del equipo en tareas clave</span>
+              </div>
+              <div class="impact__metric">
+                <strong>$1.2M MXN</strong>
+                <span>Ahorro anual estimado en costos operativos</span>
+              </div>
+            </div>
+            <a href="#trabajo" class="link-arrow">
+              <span>Ver casos de éxito</span>
+              <i class="link-arrow__icon" data-icon="arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TECH MARQUEE ================= -->
+      <section class="tech" id="tecnologias" aria-label="Tecnologías que utilizamos">
+        <p class="eyebrow trust__label">Tecnologías que utilizamos</p>
+        <div class="marquee marquee--tech" data-marquee>
+          <div class="marquee__track">
+            <span class="marquee__item mono">React</span>
+            <span class="marquee__item mono">Next.js</span>
+            <span class="marquee__item mono">Node.js</span>
+            <span class="marquee__item mono">Python</span>
+            <span class="marquee__item mono">PostgreSQL</span>
+            <span class="marquee__item mono">AWS</span>
+            <span class="marquee__item mono">Docker</span>
+            <span class="marquee__item mono">Microservicios</span>
+            <span class="marquee__item mono">IA</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CTA FINAL ================= -->
+      <section class="cta" id="nosotros">
+        <h2 class="display cta__title">
+          <span class="reveal-line" data-reveal>¿Listo para</span>
+          <span class="reveal-line" data-reveal>construir lo que</span>
+          <span class="reveal-line" data-reveal>sigue?</span>
+        </h2>
+        <div class="cta__side">
+          <p class="lead">
+            Cuéntanos tu idea. Hagamos un sistema que transforme tu negocio.
+          </p>
+          <div class="cta__actions" id="contacto">
+            <a
+              href="https://wa.me/529981684617?text=Hola%2C%20me%20gustar%C3%ADa%20platicar%20sobre%20un%20proyecto%20de%20software."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn--glass glass"
+            >
+              <span class="btn__ripple" aria-hidden="true"></span>
+              <span>Iniciar conversación</span>
+              <i class="btn__icon" data-icon="message-circle" aria-hidden="true"></i>
+            </a>
+            <button type="button" class="btn btn--glass btn--glass-secondary glass" data-open-contact-modal>
+              <span class="btn__ripple" aria-hidden="true"></span>
+              <span>Solicitar propuesta</span>
+              <i class="btn__icon" data-icon="mail" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 Miseltum</span>
+      <span class="footer__mono mono">Software a medida · Núcleo digital</span>
+    </footer>
+
+    <!-- ================= CONTACT MODAL ================= -->
+    <div class="modal" data-contact-modal aria-hidden="true">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__panel glass" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button type="button" class="modal__close" data-modal-close aria-label="Cerrar">
+          <i data-icon="x" aria-hidden="true"></i>
+        </button>
+
+        <div data-modal-form-view>
+          <p class="eyebrow">
+            <span class="eyebrow__arrow" data-icon="arrow-left" aria-hidden="true"></span> Solicitar propuesta
+          </p>
+          <h3 id="modal-title" class="h2 modal__title">Cuéntanos sobre tu proyecto</h3>
+          <p class="lead modal__lead">
+            Responde estas preguntas y te contactamos con una propuesta a la medida.
+          </p>
+
+          <form class="contact-form" data-contact-form novalidate>
+            <div class="field">
+              <label for="cf-name">Nombre completo</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" />
+              <span class="field__error" data-error-for="name"></span>
+            </div>
+
+            <div class="field">
+              <label for="cf-company">Empresa</label>
+              <input id="cf-company" name="company" type="text" autocomplete="organization" />
+              <span class="field__error" data-error-for="company"></span>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="cf-email">Correo electrónico</label>
+                <input id="cf-email" name="email" type="email" autocomplete="email" />
+                <span class="field__error" data-error-for="email"></span>
+              </div>
+              <div class="field">
+                <label for="cf-phone">Teléfono <span class="field__optional">(opcional)</span></label>
+                <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+                <span class="field__error" data-error-for="phone"></span>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="cf-project-type">Tipo de proyecto</label>
+                <div class="field__select-wrap">
+                  <select id="cf-project-type" name="projectType">
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="Plataforma web">Plataforma web</option>
+                    <option value="Sistema interno">Sistema interno</option>
+                    <option value="Automatización">Automatización</option>
+                    <option value="Integraciones">Integraciones</option>
+                    <option value="Aplicación móvil">Aplicación móvil</option>
+                    <option value="IA empresarial">IA empresarial</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                  <span class="field__chevron" data-icon="chevron-down" aria-hidden="true"></span>
+                </div>
+                <span class="field__error" data-error-for="projectType"></span>
+              </div>
+              <div class="field">
+                <label for="cf-budget">Presupuesto estimado</label>
+                <div class="field__select-wrap">
+                  <select id="cf-budget" name="budget">
+                    <option value="" disabled selected>Selecciona un rango</option>
+                    <option value="Menos de $50,000 MXN">Menos de $50,000 MXN</option>
+                    <option value="$50,000 – $150,000 MXN">$50,000 – $150,000 MXN</option>
+                    <option value="$150,000 – $500,000 MXN">$150,000 – $500,000 MXN</option>
+                    <option value="Más de $500,000 MXN">Más de $500,000 MXN</option>
+                    <option value="Prefiero platicarlo">Prefiero platicarlo</option>
+                  </select>
+                  <span class="field__chevron" data-icon="chevron-down" aria-hidden="true"></span>
+                </div>
+                <span class="field__error" data-error-for="budget"></span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="cf-message">Mensaje</label>
+              <textarea id="cf-message" name="message" rows="4"></textarea>
+              <span class="field__error" data-error-for="message"></span>
+            </div>
+
+            <button type="submit" class="btn btn--glass glass modal__submit">
+              <span class="btn__ripple" aria-hidden="true"></span>
+              <span>Enviar solicitud</span>
+              <i class="btn__icon" data-icon="send" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+
+        <div class="modal__success" data-modal-success-view hidden>
+          <span class="modal__success-icon" data-icon="check-circle" aria-hidden="true"></span>
+          <h3 class="h2 modal__title">¡Listo!</h3>
+          <p class="lead">
+            Se abrió tu cliente de correo con la propuesta lista para enviar a nuestro equipo. Si
+            no se abrió automáticamente, escríbenos a
+            <a href="mailto:hugoroldantrabjo@gmail.com">hugoroldantrabjo@gmail.com</a>.
+          </p>
+          <button type="button" class="link-arrow" data-modal-close>
+            <span>Cerrar</span>
+            <i class="link-arrow__icon" data-icon="arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,265 @@
+/* ============ overlay + panel ============ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out-soft), visibility 0s linear 0.35s;
+}
+
+.modal.is-open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.35s var(--ease-out-soft), visibility 0s linear 0s;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 7, 10, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal__panel {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: min(88vh, 920px);
+  overflow-y: auto;
+  padding: var(--space-lg);
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.45s var(--ease-out-soft);
+}
+
+.modal.is-open .modal__panel {
+  transform: translateY(0) scale(1);
+}
+
+.modal__title {
+  margin-top: var(--space-xs);
+}
+
+.modal__lead {
+  margin-top: var(--space-2xs);
+  max-width: none;
+}
+
+.modal__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  z-index: 2;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  transition: background 0.25s var(--ease-out-soft), border-color 0.25s var(--ease-out-soft),
+    transform 0.25s var(--ease-out-soft);
+}
+
+.modal__close .icon {
+  color: var(--fg-70);
+  opacity: 1;
+  transition: color 0.25s var(--ease-out-soft), transform 0.25s var(--ease-out-soft);
+}
+
+.modal__close:hover {
+  background: rgba(122, 162, 255, 0.12);
+  border-color: var(--glass-border-hover);
+  transform: rotate(90deg);
+}
+
+.modal__close:hover .icon {
+  color: var(--fg);
+}
+
+/* ============ form ============ */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  min-width: 0;
+}
+
+.field label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--fg-70);
+  letter-spacing: 0.02em;
+}
+
+.field__optional {
+  color: var(--fg-45);
+  font-weight: 400;
+}
+
+.field input,
+.field textarea,
+.field select {
+  font: inherit;
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-sm);
+  padding: 0.7rem 0.9rem;
+  width: 100%;
+  transition: border-color 0.25s var(--ease-out-soft), background 0.25s var(--ease-out-soft),
+    box-shadow 0.25s var(--ease-out-soft);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--fg-45);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--glass-border-hover);
+  background: rgba(122, 162, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(77, 124, 255, 0.15);
+}
+
+.field__select-wrap {
+  position: relative;
+  display: flex;
+}
+
+.field__select-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+
+.field__chevron {
+  position: absolute;
+  top: 50%;
+  right: 0.85rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.field__chevron .icon {
+  color: var(--fg-45);
+  opacity: 1;
+}
+
+/* error state — a warm rose, kept out of the blue/violet system on purpose
+   so it reads unmistakably as validation, not as another mood of the brand */
+.field.has-error input,
+.field.has-error textarea,
+.field.has-error select {
+  border-color: rgba(255, 107, 129, 0.55);
+  background: rgba(255, 107, 129, 0.05);
+}
+
+.field.has-error input:focus,
+.field.has-error textarea:focus,
+.field.has-error select:focus {
+  box-shadow: 0 0 0 3px rgba(255, 107, 129, 0.15);
+}
+
+.field__error {
+  font-size: var(--fs-small);
+  color: var(--color-error);
+  min-height: 1em;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s var(--ease-out-soft), transform 0.25s var(--ease-out-soft);
+}
+
+.field.has-error .field__error {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal__submit {
+  align-self: flex-start;
+  margin-top: var(--space-2xs);
+}
+
+.modal__submit:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ============ success view ============ */
+.modal__success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  text-align: left;
+  padding: var(--space-sm) 0;
+}
+
+.modal__success[hidden] {
+  display: none;
+}
+
+.modal__success-icon {
+  color: var(--icon-color);
+}
+
+.modal__success-icon .icon {
+  color: var(--icon-color);
+  opacity: 1;
+  filter: drop-shadow(0 0 10px rgba(77, 124, 255, 0.45));
+}
+
+/* ============ misc ============ */
+body.no-scroll {
+  overflow: hidden;
+}
+
+@media (max-width: 560px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: var(--space-sm);
+  }
+
+  .modal__submit {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal__panel,
+  .modal__close {
+    transition: none;
+  }
+}

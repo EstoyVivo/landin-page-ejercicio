@@ -1,0 +1,113 @@
+.display {
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+}
+
+.h1 {
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-h2);
+}
+
+.h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+}
+
+.lead {
+  font-size: var(--fs-body-lg);
+  font-weight: 400;
+  line-height: var(--lh-normal);
+  color: var(--fg-70);
+  max-width: 34ch;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-45);
+}
+
+.eyebrow__arrow {
+  color: var(--accent-blue);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.05em;
+  color: var(--fg-45);
+}
+
+.glow {
+  font-style: normal;
+  color: var(--fg);
+  text-shadow: 0 0 14px rgba(77, 124, 255, 0.4), 0 0 28px rgba(139, 92, 246, 0.16);
+}
+
+/* line-reveal: each line clips upward from a hidden state; core/textReveal.ts
+   flips these to visible when the section enters view. Because each line is
+   its own block, long words still wrap inside it at narrow widths instead of
+   overflowing — the reveal degrades gracefully to a 2-line block instead of
+   breaking. */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+
+.reveal-line > * {
+  display: inline-block;
+}
+
+[data-reveal] {
+  /* transform/opacity only (never clip-path): besides being the cheaper
+     compositor-friendly properties, animating clip-path made Chromium report
+     intersectionRatio 0 for these elements, so the reveal never triggered */
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.9s var(--ease-out-expo), opacity 0.7s ease-out;
+}
+
+[data-reveal].is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+[data-reveal-delay] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.7s ease-out, transform 0.7s var(--ease-out-soft);
+  transition-delay: 0.15s;
+}
+
+[data-reveal-delay].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal-delay] {
+    clip-path: none;
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}
